@@ -21,9 +21,8 @@ var testItemId = uuid.v4(),
 // Clear out the database
 
 console.log('Clearing out the [' + testConfig.database + ']');
-db.stock.remove();
+db.stock.remove({$isolate: 1});
 console.log('Database cleared.');
-
 
 apiUri = host() + '/stock/' + testItemId;
 
@@ -43,6 +42,24 @@ describe('Scenario 1: Put a new item into the Stock collection', function () {
         .expectStatus(201)
         .toss();
 
+    frisby.create('Adding duplicate item id')
+        .put(apiUri + '/' + testItemCode)
+        .expectStatus(200)
+        .expectJSONTypes({}, {
+            existing : Object,
+            yours : Object
+        })
+        .expectJSON({
+            existing : {
+                itemId : testItemId,
+                itemCode : testItemCode
+            },
+            yours : {
+                itemId : testItemId,
+                itemCode : testItemCode
+            }
+        })
+        .toss();
 });
 
 
@@ -80,6 +97,8 @@ describe('Scenario 3: Delete a known stock item', function () {
 });
 
 describe('Scenario 4: Delete an unknown stock item', function () {
+
+    apiUri = host() + '/stock/' + badItemId;
 
     frisby.create('Delete stock item')
         .delete(apiUri)

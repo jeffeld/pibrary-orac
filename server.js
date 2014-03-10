@@ -31,6 +31,13 @@ var config = require('./lib/config/config');
 var isbndb = require('./lib/modules/isbndb');
 isbndb.setApiKey(config.isbndb_api_key);
 
+// Database config
+
+var mongojs = require ('mongojs'),
+    db = mongojs.connect(config.database, ["stock", "isbns"]);
+
+db.stock.ensureIndex({itemId : 1}, {unique : true});
+
 var app = express();
 
 app.use(function (req, res, next){

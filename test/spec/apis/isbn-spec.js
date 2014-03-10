@@ -16,7 +16,7 @@ var testISBN = '9780330441537', // Use the rename refactor to update comments if
 // Clear out the database
 
 console.log('Clearing out the [' + testConfig.database + ']');
-db.isbns.remove();
+db.isbns.remove({$isolate: 1});
 console.log('Database cleared.');
 
 
