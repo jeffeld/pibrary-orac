@@ -1,6 +1,6 @@
 'use strict';
 
-var frisby = require('/opt/node/lib/node_modules/frisby/lib/frisby'),
+var frisby = require('frisby'),
     testConfig = require('../../../lib/config/env/test.js'),
     hh = require('../../../lib/utils/httpHelpers'),
     mongojs = require('mongojs'),
