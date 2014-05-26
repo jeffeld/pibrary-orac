@@ -15,16 +15,15 @@ var apiUri = host() + '/stock/codes/';
 //
 //
 
-var codesCount = 5000; // config.codes.max;
+var codesCount = 0xfff; // config.codes.max;
 
 describe('Scenario 1: Get ' + codesCount + ' codes', function () {
 
-    // curl --request GET http://localhost:9000/api/v1/stock/codes/1500 --header 'Cache-Control:no-cache, no-store, must-revalidate'
-
-
     var codes = [];
 
-    frisby.create('New codes (length = max')
+    // curl --request GET http://localhost:9000/api/v1/stock/codes/4095 --header 'Cache-Control:no-cache, no-store, must-revalidate'
+
+    frisby.create('New codes (length = max)')
         .get (apiUri + codesCount)
         .expectStatus(200)
         .expectJSONTypes('*', [String])
@@ -33,7 +32,10 @@ describe('Scenario 1: Get ' + codesCount + ' codes', function () {
 //        })
         .toss();
 
-    frisby.create('New codes (length = max-1')
+
+    // curl --request GET http://localhost:9000/api/v1/stock/codes/4094 --header 'Cache-Control:no-cache, no-store, must-revalidate'
+
+    frisby.create('New codes (length = max-1)')
         .get (apiUri + (codesCount-1))
         .expectStatus(200)
         .expectJSONTypes('*', [String])
@@ -42,18 +44,23 @@ describe('Scenario 1: Get ' + codesCount + ' codes', function () {
 //        })
         .toss();
 
-    frisby.create('New codes (length = max+1')
+    // curl --request GET http://localhost:9000/api/v1/stock/codes/4097 --header 'Cache-Control:no-cache, no-store, must-revalidate'
+
+    frisby.create('New codes (length = max+2)')
         .get (apiUri + (codesCount+2))
         .expectStatus(403)
         .toss();
 
+    // curl --request GET http://localhost:9000/api/v1/stock/codes/0 --header 'Cache-Control:no-cache, no-store, must-revalidate'
 
-    frisby.create('New codes (length = 0')
+    frisby.create('New codes (length = 0)')
         .get (apiUri + '0')
         .expectStatus(403)
         .toss();
 
-    frisby.create('New codes (length = -1')
+    // curl --request GET http://localhost:9000/api/v1/stock/codes/-1 --header 'Cache-Control:no-cache, no-store, must-revalidate'
+
+    frisby.create('New codes (length = -1)')
         .get (apiUri + '-1')
         .expectStatus(403)
         .toss();
