@@ -29,6 +29,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // Application Config
 var config = require('./lib/config/config');
 var isbndb = require('./lib/modules/isbndb');
+var apiV1 = require('./lib/controllers/apiV1');
 isbndb.setApiKey(config.isbndb_api_key);
 
 // Database config
@@ -38,6 +39,8 @@ var mongojs = require ('mongojs'),
 
 db.stock.ensureIndex({itemId : 1}, {unique : true});
 db.members.ensureIndex({memberId : 1}, {unique : true});
+
+apiV1.seedTestCodes();
 
 var app = express();
 
