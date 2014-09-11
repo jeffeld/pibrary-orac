@@ -41,8 +41,6 @@ db.stock.ensureIndex({itemId : 1}, {unique : true});
 db.members.ensureIndex({memberId : 1}, {unique : true});
 db.isbns.ensureIndex({search_title : "text", search_author : "text"});
 
-apiV1.seedTestCodes();
-
 var app = express();
 
 app.use(function (req, res, next){
