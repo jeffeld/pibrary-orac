@@ -32,6 +32,9 @@ var isbndb = require('./lib/modules/isbndb');
 var apiV1 = require('./lib/controllers/apiV1');
 isbndb.setApiKey(config.isbndb_api_key);
 
+// Application Event Management
+require('./lib/appevents');
+
 // Database config
 
 var mongojs = require ('mongojs'),
