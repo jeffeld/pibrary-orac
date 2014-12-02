@@ -41,7 +41,7 @@ var mongojs = require ('mongojs'),
     db = mongojs.connect(config.database, ["stock", "isbns", "members"]);
 
 db.stock.ensureIndex({itemId : 1}, {unique : true});
-db.members.ensureIndex({memberId : 1}, {unique : true});
+// db.members.ensureIndex({memberId : 1}, {unique : true});
 db.isbns.ensureIndex({search_title : "text", search_author : "text"});
 
 var app = express();
