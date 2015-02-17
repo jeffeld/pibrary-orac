@@ -2,23 +2,6 @@
 
 var express = require('express');
 
-// var redis = require('redis');
-// var redisClient = redis.createClient();
-// var orac_api_key = "9876";
-//redisClient.get ('orac_api_key', function (err, reply)
-//    {
-//        // console.log (reply);
-//
-//        if (err) {
-//            console.log ('orac_api_key hot found!');
-//        }
-//
-//        orac_api_key = reply;
-//
-//    });
-// console.log ('orac api key == ' + orac_api_key);
-
-
 /**
  * Main application file
  */
@@ -49,6 +32,19 @@ var app = express();
 app.use(function (req, res, next){
    res.setHeader ('X-Powered-By', 'Orac');
    next();
+});
+
+app.use(function (req, res, next){
+
+  var serviceNotConfigured = 'Service not configured';
+  if (config.isbndb_api_key === undefined) {
+    console.error ('ORAC_ISBNDB_KEY not defined');
+    res.send (500, serviceNotConfigured);
+    return;
+  }
+
+  next();
+
 });
 
 // Express settings
