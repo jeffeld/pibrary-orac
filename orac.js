@@ -21,7 +21,7 @@ require('./lib/appevents');
 // Database config
 
 var mongojs = require ('mongojs'),
-    db = mongojs.connect(config.database, ["stock", "isbns", "members"]);
+    db = mongojs(config.database, ["stock", "isbns", "members"]);
 
 db.stock.ensureIndex({itemId : 1}, {unique : true});
 // db.members.ensureIndex({memberId : 1}, {unique : true});

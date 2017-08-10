@@ -5,7 +5,7 @@ var frisby = require('frisby'),
     hh = require('../../../lib/utils/httpHelpers'),
     mongojs = require('mongojs'),
     uuid = require('../../../app/bower_components/node-uuid'),
-    db = mongojs.connect(testConfig.database, ['stock']);
+    db = mongojs(testConfig.database, ['stock']);
 
 
 

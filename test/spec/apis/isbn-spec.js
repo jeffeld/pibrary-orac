@@ -4,7 +4,7 @@ var frisby = require('frisby'),
     testConfig = require('../../../lib/config/env/test.js'),
     hh = require('../../../lib/utils/httpHelpers'),
     mongojs = require('mongojs'),
-    db = mongojs.connect(testConfig.database, ['isbns']);
+    db = mongojs(testConfig.database, ['isbns']);
 
 var host = function () {
     return testConfig.host + ':' + testConfig.port + '/api/v1';
