@@ -5,6 +5,7 @@
     "ejs": "~0.8.4",
     "express": "~3.4.3",
     "lodash": "~2.4.1",
+    "mongojs": "^2.4.1",
     "q": "~1.0.1",
     "restler": "^3.2.2",
     "underscore": "~1.7.0"
@@ -56,6 +57,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "start": "node orac.js",
     "test": "grunt test"
   }
 }
